@@ -1,0 +1,72 @@
+| Nhu cầu                            | Mô tả                                                     |
+| ---------------------------------- | --------------------------------------------------------- |
+| Chụp nhanh thông tin trên màn hình | Lỗi phần mềm, hóa đơn, đoạn chat, giao diện web, tài liệu |
+| Ghi chú trực tiếp lên ảnh          | Khoanh vùng, gạch chân, highlight, vẽ bằng bút            |
+| Sao chép vào clipboard             | Dán nhanh vào Zalo, Teams, Word, email, ticket            |
+| Lưu thành file                     | Lưu ảnh làm bằng chứng, tài liệu, hướng dẫn               |
+| Upload                             | Upload file lên API, được cấu hình trong appsetting.json -> Lấy được url file ảnh server trả về |
+ 
+ 
+
+User nhấn New / Ctrl + Win + Print
+        ↓
+Hệ thống phủ overlay mờ lên màn hình
+        ↓
+User chọn chế độ chụp
+        ↓
+User kéo chuột / chọn cửa sổ / chọn toàn màn hình
+        ↓
+Ảnh được capture
+        ↓
+Ảnh được đưa vào clipboard và/hoặc mở trong editor
+        ↓
+Upload ảnh lên API
+        ↓
+Lấy url ảnh API trả về
+
+
+
+| Phím tắt              | Chức năng                           |
+| -----------------     | ----------------------------------- |
+| `Ctrl + Win + Print`  | Mở giao diện chụp ảnh màn hình      |
+| `Ctrl + C`            | Copy ảnh vào clipboard              |
+| `Ctrl + S`            | Lưu ảnh                             |
+| `Ctrl + U`            | Upload ảnh lên server               |
+| `Ctrl + N`            | Tạo ảnh chụp mới                    |
+
+
+| Định dạng | Đặc điểm                        |
+| --------- | ------------------------------- |
+| PNG       | Rõ nét, phù hợp UI/screenshot   |
+| JPG/JPEG  | Dung lượng nhẹ hơn, có nén      |
+| GIF       | Ít dùng hơn cho screenshot tĩnh |
+
+ Đây là Curl của API, hãy update lại API tương ứng:
+curl -X 'POST' \
+  'http://192.168.1.69:55834/api/Files/upload' \
+  -H 'accept: text/plain' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@38u9mb.jpg;type=image/jpeg' \
+  -F 'serviceName=pbt'
+
+
+  Đây là response trả về khi call API, hãy cập nhật lại logic sau khi UPLOAD
+{
+  "success": true,
+  "message": "Upload success",
+  "data": {
+    "id": "69f1c4addc61f780aa96a411",
+    "fileName": "cfac1904-c17a-44d0-948a-1ece6c83320b.jpg",
+    "originalFileName": "38u9mb.jpg",
+    "path": "/app/uploads/pbt/2026/04/29/cfac1904-c17a-44d0-948a-1ece6c83320b.jpg",
+    "url": "http://192.168.1.69:55834/api/files/69f1c4addc61f780aa96a411",
+    "size": 80020,
+    "contentType": "image/jpeg",
+    "createdAt": "2026-04-29T08:43:25.8085272Z"
+  }
+}
+
+Hãy thay đổi lại cho tôi với các yêu cầu sau:
+Chỉ 1 form duy nhất thực hiện chức năng chụp, chỉnh sửa, upload.
+Tức là Gom Snipping Editor và  Snipping Screen về 1 form duy nhất.
+Bổ sung icon/animate để hình dung quá trình upload, trạng thái upload, textbox link ảnh API trả về, có button copy link trả về
