@@ -4,7 +4,9 @@ namespace SnippingScreen;
 
 internal sealed class AppSettings
 {
+    public int HostType { get; set; }
     public UploadSettings Upload { get; init; } = new();
+    public FreeImageHostingSettings FreeImageHost { get; init; } = new();
 
     public static AppSettings Load()
     {
@@ -35,4 +37,10 @@ internal sealed class UploadSettings
     public string FormFieldName { get; init; } = "file";
     public string ServiceName { get; init; } = "pbt";
     public string ResponseUrlJsonPath { get; init; } = "url";
+}
+
+internal sealed class FreeImageHostingSettings
+{
+    public string Url { get; init; } = "";
+    public string Key { get; init; } = "";
 }

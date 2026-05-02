@@ -29,7 +29,7 @@ namespace SnippingScreen
         public Form1()
         {
             _settings = AppSettings.Load();
-            _uploadService = new ImageUploadService(_settings.Upload);
+            _uploadService = new ImageUploadService(_settings);
             InitializeComponent();
             BuildInterface();
             RegisterGlobalHotKey();
@@ -69,7 +69,7 @@ namespace SnippingScreen
 
         private void BuildInterface()
         {
-            Text = "Snipping Screen";
+            Text = "PBT - Snipping Screen";
             MinimumSize = new Size(980, 650);
             StartPosition = FormStartPosition.CenterScreen;
             KeyPreview = true;

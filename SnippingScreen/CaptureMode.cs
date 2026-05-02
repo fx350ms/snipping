@@ -6,3 +6,9 @@ internal enum CaptureMode
     Window,
     FullScreen
 }
+
+internal enum HostType
+{
+    PBTHost = 1,
+    FreeImageHosting = 2
+}
